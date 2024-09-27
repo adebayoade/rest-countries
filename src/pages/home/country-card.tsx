@@ -7,7 +7,10 @@ type CountryCardProps = {
 
 export default function CountryCard({ country }: CountryCardProps) {
   return (
-    <Link to={`/country?name=${country.name.common}`} className="bg-card flex flex-col shadow-md rounded-lg">
+    <Link
+      to={`/country?name=${country.name.common.toLowerCase()}`}
+      className="bg-card hover:bg-primary/5 flex flex-col shadow-md rounded-lg"
+    >
       <div className="w-full h-[150px]">
         <img
           alt={country.name.common}

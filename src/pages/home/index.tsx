@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <div className="container mt-10 flex flex-col gap-12">
-      <div className="flex gap-5 justify-between">
+      <div className="flex flex-col lg:flex-row gap-7 justify-between">
         <div className="w-full max-w-[600px] relative">
           <SearchIcon size={22} className="ml-5 absolute left-0 top-3" />
           <Input

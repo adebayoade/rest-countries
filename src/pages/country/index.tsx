@@ -38,7 +38,7 @@ export default function Country() {
               <div className="flex flex-col gap-5">
                 <span className="font-bold text-3xl my-3">{country[0].name.common}</span>
 
-                <div className="flex gap-5">
+                <div className="flex flex-col xl:lg:flex-row gap-10">
                   <div className="basis-full flex flex-col gap-3">
                     <span>
                       <span className="font-semibold">Native Name: </span>
@@ -85,12 +85,12 @@ export default function Country() {
                   </div>
                 </div>
 
-                <div className="mt-5 flex gap-5 items-center">
+                <div className="mt-5 flex flex-col lg:flex-row gap-5 lg:items-center">
                   <span className="font-semibold">Border Countries:</span>
-                  <div className="flex gap-5 items-center">
-                    <span className="py-2 px-6 border">France</span>
-                    <span className="py-2 px-6 border">France</span>
-                    <span className="py-2 px-6 border">France</span>
+                  <div className="flex gap-5">
+                    <span className="py-1 px-6 border bg-card">France</span>
+                    <span className="py-1 px-6 border bg-card">France</span>
+                    <span className="py-1 px-6 border bg-card">France</span>
                   </div>
                 </div>
               </div>

@@ -11,7 +11,6 @@ export default function Country() {
 
   const { country, isLoading, isError } = useCountryQuery(name);
 
-  console.log(country);
   return (
     <div className="container mt-10">
       {isLoading ? (
@@ -37,63 +36,70 @@ export default function Country() {
               </div>
 
               <div className="flex flex-col gap-5">
-                <span className="font-bold text-3xl my-3">{country[0].name.common}</span>
+                <span className="font-bold text-3xl my-3">{country[0]?.name.common}</span>
 
                 <div className="flex flex-col xl:lg:flex-row gap-10">
                   <div className="basis-full flex flex-col gap-3">
-                    <span>
-                      <span className="font-semibold">Native Name: </span>
-                      {country[0].native_name}
-                    </span>
+                    {/* {country[0].name?.nativeName && (
+                      <span>
+                        <span className="font-semibold">Native Name: </span>
+                        {country[0].name.nativeName.eng.official}
+                      </span>
+                    )} */}
                     <span>
                       <span className="font-semibold">Population: </span>
-                      {country[0].population.toLocaleString()}
+                      {country[0]?.population.toLocaleString()}
                     </span>
                     <span>
                       <span className="font-semibold">Region: </span>
-                      {country[0].region}
+                      {country[0]?.region}
                     </span>
                     <span>
                       <span className="font-semibold">Sub Region: </span>
-                      {country[0].subregion}
+                      {country[0]?.subregion}
                     </span>
                     <span>
                       <span className="font-semibold">Capital: </span>
-                      {country[0].capital}
+                      {country[0]?.capital}
                     </span>
                   </div>
 
                   <div className="basis-full flex flex-col gap-3">
                     <span>
                       <span className="font-semibold">Top Level Domain: </span>
-                      {country[0].capital}
+                      {country[0]?.capital}
                     </span>
                     <span>
                       <span className="font-semibold">Currencies: </span>
-                      {/* {country[0].currencies[0]} */}
-                    </span>
-                    <span>
-                      <span className="font-semibold">Currencies: </span>
-                      {/* {country[0].currencies[0]} */}
-                      {/* {Object.values(country[0].currencies).map((val, index) => (
-                        <span>val</span>
-                      ))} */}
+                      {Object.keys(country[0]?.currencies)[0]}
                     </span>
                     <span>
                       <span className="font-semibold">Languages: </span>
-                      {/* {country[0].languages['eng']} */}
+                      {Object.keys(country[0]?.languages)[0]}
                     </span>
                   </div>
                 </div>
 
-                <div className="mt-5 flex flex-col lg:flex-row gap-5 lg:items-center">
-                  <span className="font-semibold">Border Countries:</span>
-                  <div className="flex gap-5">
-                    <span className="py-1 px-6 border bg-card">France</span>
-                    <span className="py-1 px-6 border bg-card">France</span>
-                    <span className="py-1 px-6 border bg-card">France</span>
+                {country[0]?.borders && (
+                  <div className="mt-5 flex flex-col lg:flex-row gap-5 lg:items-center">
+                    <span className="font-semibold">Border Countries:</span>
+                    <div className="flex gap-5">
+                      {/* {Object.keys(country[0]?.borders).map(c => (
+                        <span className="py-1 px-6 border bg-card">{country[c]}</span>
+                      ))} */}
+                    </div>
                   </div>
-                </div>
+                )}
+                {/* {country[0]?.borders && (
+                  <div className="mt-5 flex flex-col lg:flex-row gap-5 lg:items-center">
+                    <span className="font-semibold">Border Countries:</span>
+                    <div className="flex gap-5">
+                      <span className="py-1 px-6 border bg-card">France</span>
+                      <span className="py-1 px-6 border bg-card">France</span>
+                      <span className="py-1 px-6 border bg-card">France</span>
+                    </div>
+                  </div>
+                )} */}
               </div>
             </div>
           </div>

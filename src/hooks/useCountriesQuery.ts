@@ -6,14 +6,12 @@ const useCountriesQuery = (region: Region, term = '') => {
   const getCountriesFromServer = async () => {
     try {
       if (term) {
-        console.log(term);
         const res = await api.get(`/v3.1${term && `/name/${term}`}`);
         const { data } = res;
         return data;
       }
 
       if (region) {
-        console.log(region);
         const res = await api.get(`/v3.1${region !== 'all' ? `/region/${region}` : '/all'}`);
         const { data } = res;
         return data;

@@ -1,3 +1,4 @@
+import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import Spinner from '@/components/ui/spinner';
 import useCountryQuery from '@/hooks/useCountryQuery';
@@ -16,7 +17,7 @@ export default function Country() {
       {isLoading ? (
         <Spinner />
       ) : isError ? (
-        'Error'
+        <Alert variant={'destructive'}>An error occurred</Alert>
       ) : (
         country && (
           <div className="flex flex-col gap-12">

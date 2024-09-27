@@ -12,6 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Alert } from '@/components/ui/alert';
 
 export default function Home() {
   const [region, setRegion] = useState<Region>('all');
@@ -55,7 +56,7 @@ export default function Home() {
       {isLoading ? (
         <Spinner />
       ) : isError ? (
-        'Error'
+        <Alert variant={'destructive'}>An error occurred</Alert>
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-10">
           {countries?.map((country: Country, index: Key) => (

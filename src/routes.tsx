@@ -2,6 +2,7 @@ import { RouteObject } from 'react-router-dom';
 import AppLayout from './components/layouts/app-layout';
 import Home from './pages/home';
 import NotFound from './pages/not-found';
+import Country from './pages/country';
 
 export const routes: RouteObject[] = [
   {
@@ -10,6 +11,10 @@ export const routes: RouteObject[] = [
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/country',
+        element: <Country />,
       },
       {
         path: '*',

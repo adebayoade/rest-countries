@@ -1,49 +1,66 @@
 import { Input } from '@/components/ui/input';
 import useCountriesQuery from '@/hooks/useCountriesQuery';
 import { SearchIcon } from 'lucide-react';
+import CountryCard from './country-card';
+import { Country, Region } from '@/types';
+import Spinner from '@/components/ui/spinner';
+import { Key, useState } from 'react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export default function Home() {
-  const { countries, isLoading } = useCountriesQuery();
+  const [region, setRegion] = useState<Region>('all');
+  const [term, setTerm] = useState('');
+  const { countries, isError, isLoading } = useCountriesQuery(region, term);
 
-  console.log(countries);
+  const handleRegionSelect = (region: Region) => {
+    setRegion(region);
+  };
+
   return (
-    <div className="container mt-10">
-      {countries && (
-        <div className="flex flex-col gap-12">
-          <div className="max-w-[600px] relative">
-            <SearchIcon size={22} className='ml-5 absolute left-0 top-3' />
-            <Input placeholder='Search for a country' className='pl-14' />
-          </div>
+    <div className="container mt-10 flex flex-col gap-12">
+      <div className="flex gap-5 justify-between">
+        <div className="w-full max-w-[600px] relative">
+          <SearchIcon size={22} className="ml-5 absolute left-0 top-3" />
+          <Input
+            onChange={e => {
+              setRegion('all');
+              setTerm(e.target.value);
+            }}
+            placeholder="Search for a country"
+            className="pl-14 shadow-md"
+          />
+        </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-4 gap-10">
-            {countries.map((country, index) => (
-              <div className="bg-card flex flex-col" key={index}>
-                <div className="w-full h-[150px]">
-                  <img
-                    alt={country}
-                    className="object-cover h-full w-full overflow-hidden"
-                    src={country.flags.png}
-                  />
-                </div>
+        <Select value={region} onValueChange={value => handleRegionSelect(value as Region)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Filter By Region" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All</SelectItem>
+            <SelectItem value="africa">Africa</SelectItem>
+            <SelectItem value="america">America</SelectItem>
+            <SelectItem value="asia">Asia</SelectItem>
+            <SelectItem value="europe">Europe</SelectItem>
+            <SelectItem value="oceania">Oceania</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
-                <div className="flex p-5 py-6 flex-col gap-2">
-                  <span className="font-semibold text-lg my-3">{country.name.common}</span>
-                  <span>
-                    <span className="font-semibold">Population: </span>
-                    {country.population.toLocaleString()}
-                  </span>
-                  <span>
-                    <span className="font-semibold">Region: </span>
-                    {country.region}
-                  </span>
-                  <span>
-                    <span className="font-semibold">Capital: </span>
-                    {country.capital}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+      {isLoading ? (
+        <Spinner />
+      ) : isError ? (
+        'Error'
+      ) : (
+        <div className="grid grid-cols-1 xl:grid-cols-4 gap-10">
+          {countries?.map((country: Country, index: Key) => (
+            <CountryCard key={index} country={country} />
+          ))}
         </div>
       )}
     </div>

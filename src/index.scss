@@ -34,9 +34,9 @@
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
+    --background: 205 25% 17%;
     --foreground: 60 9.1% 97.8%;
-    --card: 20 14.3% 4.1%;
+    --card: 209 23% 22%;
     --card-foreground: 60 9.1% 97.8%;
     --popover: 20 14.3% 4.1%;
     --popover-foreground: 60 9.1% 97.8%;
@@ -90,5 +90,96 @@
   .has-line-after.active:after,
   .has-line-after:hover:after {
     width: 100%;
+  }
+  .pagination {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    user-select: none;
+
+    .page-item {
+      position: relative;
+      padding: 0.5rem 0.8rem;
+      // display: none;
+
+      font-size: 14px;
+      &:not(:last-child) {
+        margin-right: 8px;
+      }
+    }
+
+    @media (min-width: 650px) {
+      .page-item {
+        display: block;
+      }
+    }
+
+    .page-item.disabled {
+      @apply text-gray-400;
+      // color: #d0d5dd;
+      pointer-events: none;
+    }
+
+    .page-item .page-prev,
+    .page-item .page-next {
+      &.disabled .page-link {
+        cursor: not-allowed;
+        // pointer-events: none;
+      }
+    }
+
+    .page-link.disabled {
+      // color: #d0d5dd;
+      @apply text-gray-400;
+    }
+
+    .page-item.page-prev {
+      // position: absolute;
+      // left: 0;
+      // padding: 0;
+      // display: block;
+
+      @media (max-width: 650px) {
+        display: none;
+      }
+    }
+
+    .page-item.page-next {
+      // position: absolute;
+      // right: 0;
+      // padding: 0;
+      // display: block;
+      // @apply bg-primary rounded-md text-white;
+
+      @media (max-width: 650px) {
+        display: none;
+      }
+    }
+
+    .page-item:hover {
+      @apply text-primary;
+    }
+
+    .page-item.selected {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 20px;
+      pointer-events: none;
+      @apply bg-primary text-white;
+
+      @media (min-width: 650px) {
+        visibility: visible;
+        opacity: 1;
+      }
+      a {
+        color: #ffff;
+      }
+    }
   }
 }
